@@ -68,11 +68,11 @@ FOOD_REPORT_DATA = {
         },
         "footnotes": [
             {
-                "idv": "a",
+                "id": "a",
                 "desc": "Footnote 1",
             },
             {
-                "idv": "b",
+                "id": "b",
                 "desc": "Footnote 2",
             }
         ],
