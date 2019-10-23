@@ -192,7 +192,10 @@ class UsdaClient(DataGovClientBase):
         :raises DataGovApiError: If a Data.gov API returns an error.
         """
         return FoodReport.from_response_data(
-            self.get_food_report_raw(type=report_type.value, ndbno=ndb_food_id)
+            self.get_food_report_raw(
+                type=report_type.value,
+                ndbno=str(ndb_food_id).zfill(5),
+            ),
         )
 
     def get_food_report_v2_raw(self, **kwargs):
@@ -229,7 +232,10 @@ class UsdaClient(DataGovClientBase):
         return list(map(
             _get_report,
             self.get_food_report_v2_raw(
-                type=report_type.value, ndbno=ids,
+                type=report_type.value,
+                ndbno=[
+                    str(food_id).zfill(5) for food_id in ids
+                ],
             )['foods']
         ))
 

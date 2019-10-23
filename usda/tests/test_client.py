@@ -34,7 +34,7 @@ class TestClient(object):
 
     @urlmatch(path=r'/ndb/V2/reports')
     def api_report_v2(self, uri, request):
-        if "ndbno=666" in uri.query:
+        if "ndbno=00666" in uri.query:
             return json.dumps({
                 "foods": [{"error": "Not found"}],
                 "count": "1",
