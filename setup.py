@@ -13,7 +13,7 @@ setup(
     packages=find_packages(
         exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     package_data={
-        '': ['*.md', 'LICENSE', 'README'],
+        '': ['*.rst', 'LICENSE', 'README'],
     },
     install_requires=read_requirements('requirements.txt'),
     python_requires='>=3.4',
@@ -22,7 +22,7 @@ setup(
     },
     license='GNU General Public License 3',
     description="A fork of pygov focused on USDA nutritional database API",
-    long_description=open('README.md').read(),
+    long_description=open('README.rst').read(),
     long_description_content_type='text/markdown',
     keywords="api usda nutrition food",
     url="https://gitlab.com/Lucidiot/python-usda",
