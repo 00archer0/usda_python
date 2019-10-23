@@ -82,3 +82,10 @@ class UsdaNdbReportType(Enum):
             'f': cls.full,
             's': cls.stats,
         }.get(value, value)
+
+
+class UsdaNdbDataSource(Enum):
+    "USDA food data sources"
+
+    StandardReference = 'Standard Reference'
+    BrandedFoodProducts = 'Branded Food Products'

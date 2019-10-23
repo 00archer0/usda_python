@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from usda.enums import UsdaNdbListType, UsdaNdbReportType, UsdaUriActions
+from usda.enums import \
+    UsdaNdbListType, UsdaNdbReportType, UsdaUriActions, UsdaNdbDataSource
 from usda.domain import \
     ListItem, Nutrient, Food, FoodReport, FoodReportV2, NutrientReportFood
 from usda.base import DataGovClientBase, DataGovApiError
@@ -151,7 +152,7 @@ class UsdaClient(DataGovClientBase):
         """
         return RawPaginator(self, UsdaUriActions.search, **kwargs)
 
-    def search_foods(self, query, max, offset=0, sort='r'):
+    def search_foods(self, query, max, offset=0, sort='r', ds=None):
         """
         Get a list of food items matching a specified query.
 
@@ -160,14 +161,20 @@ class UsdaClient(DataGovClientBase):
         :param int offset: Index to start listing at.
         :param str sort: The sorting method.
            ``'r'`` for relevance, ``'n'`` for item ID.
+        :param ds: Optionally filter by data source: Standard Reference or
+           Branded Food Products.
+        :type ds: usda.enums.UsdaNdbDataSource
         :returns: Generator yielding food items as
            :class:`usda.domain.Food` instances.
         :rtype: usda.pagination.ModelPaginator
         """
-        return ModelPaginator(
-            Food,
-            self.search_foods_raw(q=query, max=max, offset=offset, sort=sort),
-        )
+        params = {'q': query, 'max': max, 'offset': offset, 'sort': sort}
+        if ds:
+            if isinstance(ds, UsdaNdbDataSource):
+                params['ds'] = ds.value
+            else:
+                params['ds'] = ds
+        return ModelPaginator(Food, self.search_foods_raw(**params))
 
     def get_food_report_raw(self, **kwargs):
         r"""
