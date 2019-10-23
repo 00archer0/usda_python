@@ -71,6 +71,14 @@ nutritional data for some pseudo-scientific calculations in the
 `PseudoScience <https://gitlab.com/Lucidiot/PseudoScience>`_ project
 but has been extended to provide a better coverage of the API.
 
+.. warning::
+
+   Since October 1, 2019, the APIs this package relies on have been
+   deprecated. python-usda 1.x will remove those APIs and rely on the new
+   `Food Data Central`_ APIs.
+
+.. _Food Data Central: https://fdc.nal.usda.gov/api-guide.html
+
 Setup
 -----
 

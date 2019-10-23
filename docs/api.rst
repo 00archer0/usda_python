@@ -17,32 +17,48 @@ Domain
 Base classes
 ^^^^^^^^^^^^
 
-.. automodule:: usda.domain
-   :members: UsdaObject, ListItem
+.. autoclass:: usda.domain.UsdaObject
+   :members:
+
+.. autoclass:: usda.domain.ListItem
+   :members:
 
 Items
 ^^^^^
 
-.. automodule:: usda.domain
-   :members: Food, Nutrient, Measure
+.. autoclass:: usda.domain.Food
+   :members:
+
+.. autoclass:: usda.domain.Nutrient
+   :members:
+
+.. autoclass:: usda.domain.Measure
+   :members:
 
 Food Reports
 ^^^^^^^^^^^^
 
-.. automodule:: usda.domain
-   :members: FoodReport, FoodReportV2, Source
+.. autoclass:: usda.domain.FoodReport
+   :members:
+
+.. autoclass:: usda.domain.FoodReportV2
+   :members:
+
+.. autoclass:: usda.domain.Source
+   :members:
 
 Nutrient Reports
 ^^^^^^^^^^^^^^^^
 
-.. automodule:: usda.domain
-   :members: NutrientReportFood
+.. autoclass:: usda.domain.NutrientReportFood
+   :members:
 
 Enums
 -----
 
 .. automodule:: usda.enums
-   :members: UsdaUriActions, UsdaNdbListType, UsdaNdbReportType
+   :members: UsdaUriActions, UsdaNdbListType, UsdaNdbReportType,
+      UsdaNdbDataSource
 
 Low level classes
 -----------------
@@ -50,15 +66,24 @@ Low level classes
 Base client
 ^^^^^^^^^^^
 
-.. automodule:: usda.base
-   :members: BASE_URI, DataGovClientBase, api_request
+.. autodata:: usda.base.BASE_URI
+
+.. autoclass:: usda.base.DataGovClientBase
+   :members:
+
+.. autofunction:: usda.base.api_request
 
 Exceptions
 ^^^^^^^^^^
 
-.. automodule:: usda.base
-   :members: DataGovApiError, DataGovApiRateExceededError,
-      DataGovInvalidApiKeyError
+.. autoexception:: usda.base.DataGovApiError
+   :members:
+
+.. autoexception:: usda.base.DataGovApiRateExceededError
+   :members:
+
+.. autoexception:: usda.base.DataGovInvalidApiKeyError
+   :members:
 
 Pagination
 ^^^^^^^^^^

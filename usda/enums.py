@@ -59,7 +59,10 @@ class UsdaNdbReportType(Enum):
     """
 
     full = "f"
-    """Contains all the available nutrients"""
+    """
+    Contains all the available nutrients.
+    Only available on Standard Reference items.
+    """
 
     stats = "s"
     """
@@ -88,4 +91,11 @@ class UsdaNdbDataSource(Enum):
     "USDA food data sources"
 
     StandardReference = 'Standard Reference'
+    """
+    Nutritional information for generic food items.
+    """
+
     BrandedFoodProducts = 'Branded Food Products'
+    """
+    Nutritional information provided to the USDA by the food industry.
+    """
