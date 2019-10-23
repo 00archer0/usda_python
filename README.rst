@@ -22,10 +22,10 @@ Usage
 .. code:: python
 
    from usda.client import UsdaClient
-   
+
    client = UsdaClient("YOUR_API_KEY")
    foods = client.list_foods(5)
-   
+
    for food in foods:
        print(food.name)
 
