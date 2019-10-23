@@ -7,11 +7,13 @@ import json
 from httmock import urlmatch, HTTMock
 from usda.client import UsdaClient
 from usda.base import DataGovApiError
-from usda.tests.sample_data import \
-    FOOD_LIST_DATA, NUTRIENT_LIST_DATA, \
-    FOOD_GROUP_LIST_DATA, DERIVATION_CODES_LIST_DATA, \
-    FOOD_REPORT_DATA, FOOD_REPORT_V2_DATA, NUTRIENT_REPORT_DATA, \
+from usda.enums import UsdaNdbReportType
+from usda.tests.sample_data import (
+    FOOD_LIST_DATA, NUTRIENT_LIST_DATA,
+    FOOD_GROUP_LIST_DATA, DERIVATION_CODES_LIST_DATA,
+    FOOD_REPORT_DATA, FOOD_REPORT_V2_DATA, NUTRIENT_REPORT_DATA,
     FOOD_SEARCH_DATA
+)
 
 
 class TestClient(object):
@@ -125,6 +127,17 @@ class TestClient(object):
             fr = cli.get_food_report(123456)
         assert fr.food.name == "Pizza"
 
+    def test_client_food_report_warning(self, apimock):
+        cli = UsdaClient("API_KAY")
+        with apimock:
+            with pytest.warns(UserWarning, match='received a basic report'):
+                fr = cli.get_food_report(
+                    123456,
+                    report_type=UsdaNdbReportType.full,
+                )
+        assert fr.food.name == "Pizza"
+        assert fr.report_type == UsdaNdbReportType.basic
+
     def test_client_food_report_v2_raw(self, apimock):
         cli = UsdaClient("API_KAY")
         with apimock:
@@ -136,6 +149,17 @@ class TestClient(object):
         with apimock:
             fr = cli.get_food_report_v2(123456)
         assert fr[0].food.name == "Pizza"
+
+    def test_client_food_report_v2_warning(self, apimock):
+        cli = UsdaClient("API_KAY")
+        with apimock:
+            with pytest.warns(UserWarning, match='received a basic report'):
+                fr = cli.get_food_report_v2(
+                    123456,
+                    report_type=UsdaNdbReportType.full,
+                )
+        assert fr[0].food.name == "Pizza"
+        assert fr[0].report_type == UsdaNdbReportType.basic
 
     def test_client_food_report_v2_error(self, apimock):
         cli = UsdaClient("API_KAY")

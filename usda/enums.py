@@ -78,4 +78,7 @@ class UsdaNdbReportType(Enum):
             'Basic': cls.basic,
             'Full': cls.full,
             'Statistics': cls.stats,
+            'b': cls.basic,
+            'f': cls.full,
+            's': cls.stats,
         }.get(value, value)

@@ -92,7 +92,7 @@ class TestUsdaDomain(object):
     def test_food_report_v2(self):
         """Tests for FoodReportV2 class"""
         fr = FoodReportV2.from_response_data(FOOD_REPORT_V2_DATA['foods'][0])
-        assert fr.report_type == "f"
+        assert fr.report_type == UsdaNdbReportType.basic
         assert len(fr.foot_notes) == 2
         assert fr.foot_notes[0].id == "a"
         assert fr.foot_notes[0].name == "Footnote 1"

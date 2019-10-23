@@ -7,6 +7,11 @@ from usda.domain import \
 from usda.base import DataGovClientBase, DataGovApiError
 from usda.pagination import \
     RawPaginator, ModelPaginator, RawNutrientReportPaginator
+import warnings
+
+REPORT_TYPE_WARNING = 'Requested a {} report, but received a basic report. ' \
+                      'Full and Statistics reports are only available on ' \
+                      'Standard Reference food items.'
 
 
 class UsdaClient(DataGovClientBase):
@@ -191,12 +196,20 @@ class UsdaClient(DataGovClientBase):
            5xx status code.
         :raises DataGovApiError: If a Data.gov API returns an error.
         """
-        return FoodReport.from_response_data(
+        report = FoodReport.from_response_data(
             self.get_food_report_raw(
                 type=report_type.value,
                 ndbno=str(ndb_food_id).zfill(5),
             ),
         )
+        if report.report_type == UsdaNdbReportType.basic \
+                and report.report_type != report_type:
+            warnings.warn(
+                REPORT_TYPE_WARNING.format(report_type.name),
+                UserWarning,
+                stacklevel=2,
+            )
+        return report
 
     def get_food_report_v2_raw(self, **kwargs):
         r"""
@@ -227,7 +240,15 @@ class UsdaClient(DataGovClientBase):
         def _get_report(food):
             if 'error' in food:
                 raise DataGovApiError(food['error'])
-            return FoodReportV2.from_response_data(food)
+            report = FoodReportV2.from_response_data(food)
+            if report.report_type == UsdaNdbReportType.basic \
+                    and report.report_type != report_type:
+                warnings.warn(
+                    REPORT_TYPE_WARNING.format(report_type.name),
+                    UserWarning,
+                    stacklevel=2,
+                )
+            return report
 
         return list(map(
             _get_report,

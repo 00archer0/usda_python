@@ -84,7 +84,7 @@ FOOD_REPORT_V2_DATA = {
         {
             "food": {
                 "sr": "Legacy",
-                "type": "f",
+                "type": "b",
                 "desc": {
                     "ndbno": "123456",
                     "name": "Pizza"
