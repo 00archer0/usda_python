@@ -49,6 +49,7 @@ def api_request(url, **parameters):
     :raises DataGovApiError: If the API returned any error.
     """
     r = requests.get(url, parameters)
+    print(url,parameters,r.headers)
     try:
         data = r.json()
     except ValueError:  # Server did not even return a JSON for the error
