@@ -3,7 +3,7 @@
 
 import requests
 
-BASE_URI = 'http://api.nal.usda.gov/'
+BASE_URI = 'https://api.nal.usda.gov/'
 """The base URI for all USDA API endpoints."""
 
 
