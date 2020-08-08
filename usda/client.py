@@ -26,7 +26,7 @@ class UsdaClient(DataGovClientBase):
            For small testing purposes, you may use ``DEMO_KEY`` as an API key;
            but beware of rate limit errors.
         """
-        super().__init__('fdc/v1', api_gov_key)
+        super().__init__('fdc/v1/', api_gov_key)
 
     def list_nutrients_raw(self, **kwargs):
         r"""
